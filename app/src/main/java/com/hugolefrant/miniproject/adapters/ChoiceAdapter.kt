@@ -1,16 +1,19 @@
 package com.hugolefrant.miniproject.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.hugolefrant.miniproject.R
-import models.Mode
+import models.Category
+import models.Country
+import models.Source
 
 
-class ModeAdapter(private val dataset: List<Mode>, val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<ModeAdapter.ViewHolder>() {
+class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<ChoiceAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.mode_item, parent, false)
@@ -23,18 +26,19 @@ class ModeAdapter(private val dataset: List<Mode>, val itemClickListener: OnItem
     override fun getItemCount(): Int = dataset.size
 
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
+        @SuppressLint("SetTextI18n")
+        fun bind(item: Any, clickListener: OnItemClickListener) {
+            val txtviewName = root.findViewById<TextView>(R.id.choice_name)
 
-        fun bind(item: Mode, clickListener: OnItemClickListener) {
-            val txtviewName = root.findViewById<TextView>(R.id.mode_name)
-            txtviewName.text = item.name
+            when(item) {
+                is Source -> txtviewName?.text = item.name
+                is Category -> txtviewName?.text = item.title
+                is Country -> txtviewName?.text = item.name
+            }
 
             root.setOnClickListener {
                 clickListener.onItemClicked(item)
             }
         }
     }
-}
-
-interface OnItemClickListener{
-    fun onItemClicked(element: Any)
 }
