@@ -1,0 +1,3 @@
+rootProject.name='MiniProject'
+include ':app'
+include ':httpdata'
