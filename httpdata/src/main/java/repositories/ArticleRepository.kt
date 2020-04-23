@@ -2,7 +2,7 @@ package repositories
 
 import android.os.Build
 import com.hugolefrant.httpdata.BuildConfig
-import models.SourceItem
+import models.Article
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -10,12 +10,12 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import services.SourceService
+import services.ArticleService
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class SourceRepository {
-    private val service: SourceService
+class ArticleRepository {
+    private val service: ArticleService
 
     private val requestInterceptor: Interceptor = Interceptor { chain ->
         val original: Request = chain.request()
@@ -58,11 +58,11 @@ class SourceRepository {
         }.addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-        service = retrofit.create(SourceService::class.java)
+        service = retrofit.create(ArticleService::class.java)
     }
-    fun list(): List<SourceItem> {
+    fun list(): List<Article> {
 
         val response = service.list().execute()
-        return response.body()?.sources ?: emptyList()
+        return response.body()?.articles ?: emptyList()
     }
 }
