@@ -12,11 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-<<<<<<< HEAD
         change(ModesFragment())
-=======
-
->>>>>>> 4cfe788b0fff1843e703ee3fc6069e8b26e33e3d
     }
 }
 
