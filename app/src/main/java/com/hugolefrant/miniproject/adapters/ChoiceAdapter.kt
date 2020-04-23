@@ -17,7 +17,7 @@ import models.SourceItem
 class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<ChoiceAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val rootView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.mode_item, parent, false)
+            .inflate(R.layout.choice_item, parent, false)
         return ViewHolder(rootView)
     }
 
@@ -32,9 +32,9 @@ class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnIte
             val txtviewName = root.findViewById<TextView>(R.id.choice_name)
 
             when(item) {
-                is SourceItem -> txtviewName?.text = item.name
-                is Category -> txtviewName?.text = item.title
-                is Country -> txtviewName?.text = item.name
+                is SourceItem -> txtviewName.text = item.name
+                is Category -> txtviewName.text = item.title
+                is Country -> txtviewName.text = item.name
             }
 
             root.setOnClickListener {

@@ -37,8 +37,7 @@ class ModesFragment: Fragment(), OnItemClickListener {
 
     override fun onItemClicked(element:Any) {
         element as Mode
-        Toast.makeText(context,"Mode ${element.name}",Toast.LENGTH_LONG)
-            .show()
+        //Toast.makeText(context,"Mode ${element.name}",Toast.LENGTH_LONG).show()
 
         when(element.name) {
             "Sources" -> {
