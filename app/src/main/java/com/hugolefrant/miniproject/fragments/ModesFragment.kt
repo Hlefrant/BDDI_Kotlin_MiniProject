@@ -12,10 +12,7 @@ import com.hugolefrant.miniproject.R
 import com.hugolefrant.miniproject.adapters.ModeAdapter
 import com.hugolefrant.miniproject.adapters.OnItemClickListener
 import com.hugolefrant.miniproject.change
-import models.Category
-import models.Country
-import models.Mode
-import models.Source
+import models.*
 
 class ModesFragment: Fragment(), OnItemClickListener {
 
@@ -40,15 +37,14 @@ class ModesFragment: Fragment(), OnItemClickListener {
 
     override fun onItemClicked(element:Any) {
         element as Mode
-        Toast.makeText(context,"Mode ${element.name}",Toast.LENGTH_LONG)
-            .show()
+        //Toast.makeText(context,"Mode ${element.name}",Toast.LENGTH_LONG).show()
 
         when(element.name) {
             "Sources" -> {
                 listModeResult = listOf(
-                    Source("1","BBC News"),
-                    Source("2","Lesnumeriques.net"),
-                    Source("3","Atlantic World")
+                    SourceItem("0","BBC NEWS", "Description","url", "la catégorie", "fr", "France"),
+                    SourceItem("1","Atlantic", "Description","url", "la catégorie", "gb", "Grande bretagne"),
+                    SourceItem("2","Lesnumeriques.net", "Description","url", "la catégorie", "fr", "France")
                 )
             }
             "Catégories" -> {
