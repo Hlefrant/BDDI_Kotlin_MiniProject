@@ -1,6 +1,6 @@
 package models
 
 data class Source(
-    val id: String,
-    val name: String
+    val status: String,
+    val sources: List<SourceItem>
 )
