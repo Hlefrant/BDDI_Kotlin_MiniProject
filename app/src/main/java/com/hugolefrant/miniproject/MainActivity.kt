@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.hugolefrant.miniproject.fragments.ModesFragment
+//import com.hugolefrant.miniproject.fragments.ModesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,11 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-<<<<<<< HEAD
-        change(ModesFragment())
-=======
+//        change(ModesFragment())
 
->>>>>>> 4cfe788b0fff1843e703ee3fc6069e8b26e33e3d
     }
 }
 

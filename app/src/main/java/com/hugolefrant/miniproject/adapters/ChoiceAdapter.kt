@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hugolefrant.miniproject.R
 import models.Category
 import models.Country
-import models.Source
+import models.SourceItem
 
 
 class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<ChoiceAdapter.ViewHolder>() {
@@ -31,7 +31,7 @@ class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnIte
             val txtviewName = root.findViewById<TextView>(R.id.choice_name)
 
             when(item) {
-                is Source -> txtviewName?.text = item.name
+                is SourceItem -> txtviewName?.text = item.name
                 is Category -> txtviewName?.text = item.title
                 is Country -> txtviewName?.text = item.name
             }

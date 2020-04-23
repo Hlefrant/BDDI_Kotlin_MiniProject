@@ -60,9 +60,9 @@ class ArticleRepository {
             .build()
         service = retrofit.create(ArticleService::class.java)
     }
-    fun list(): List<Article> {
+    fun list(filter: String): List<Article> {
 
-        val response = service.list().execute()
+        val response = service.list(filter).execute()
         return response.body()?.articles ?: emptyList()
     }
 }

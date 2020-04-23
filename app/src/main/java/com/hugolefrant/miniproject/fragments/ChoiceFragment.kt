@@ -13,10 +13,7 @@ import com.hugolefrant.miniproject.R
 import com.hugolefrant.miniproject.adapters.ChoiceAdapter
 import com.hugolefrant.miniproject.adapters.ModeAdapter
 import com.hugolefrant.miniproject.adapters.OnItemClickListener
-import models.Category
-import models.Country
-import models.Mode
-import models.Source
+import models.*
 
 class ChoiceFragment: Fragment(), OnItemClickListener {
 
@@ -41,7 +38,7 @@ class ChoiceFragment: Fragment(), OnItemClickListener {
 
     override fun onItemClicked(element:Any) {
         when(element) {
-            is Source -> {
+            is SourceItem -> {
                 Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG)
                     .show()
             }
