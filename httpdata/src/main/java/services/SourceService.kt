@@ -1,4 +1,4 @@
-package sources
+package services
 
 import models.Source
 import retrofit2.Call
