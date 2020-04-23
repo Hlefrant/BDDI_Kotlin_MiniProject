@@ -48,18 +48,15 @@ class ChoiceFragment: Fragment(), OnItemClickListener {
     override fun onItemClicked(element:Any) {
         when(element) {
             is SourceItem -> {
-                Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG)
-                    .show()
+                //Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG).show()
                 choice = element.name
             }
             is Category -> {
-                Toast.makeText(context, "Mode ${element.title}", Toast.LENGTH_LONG)
-                    .show()
+                //Toast.makeText(context, "Mode ${element.title}", Toast.LENGTH_LONG).show()
                 choice = element.title
             }
             is Country -> {
-                Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG)
-                    .show()
+                //Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG).show()
                 choice = element.name
             }
         }
