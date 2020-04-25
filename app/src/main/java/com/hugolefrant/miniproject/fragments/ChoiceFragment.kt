@@ -24,12 +24,14 @@ class ChoiceFragment: Fragment(), OnItemClickListener {
     lateinit var modeList: List<Any>
 
     lateinit var choice:String
+    
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        
         return inflater.inflate(R.layout.fragment_choices_view,container,false)
     }
 

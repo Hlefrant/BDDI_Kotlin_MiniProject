@@ -1,24 +1,32 @@
 package com.hugolefrant.miniproject.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hugolefrant.miniproject.R
 import com.hugolefrant.miniproject.adapters.ModeAdapter
 import com.hugolefrant.miniproject.adapters.OnItemClickListener
 import com.hugolefrant.miniproject.change
+import com.hugolefrant.miniproject.update
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import models.*
+import repositories.SourceRepository
 
 class ModesFragment: Fragment(), OnItemClickListener {
-
+    private val repository = SourceRepository()
     private lateinit var recycler_view: RecyclerView
 
     lateinit var listModeResult: List<Any>
+    var isLoad: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,17 +43,32 @@ class ModesFragment: Fragment(), OnItemClickListener {
         bindRecyclerView()
     }
 
+    private suspend fun getSources() {
+        withContext(Dispatchers.IO) {
+            val result = repository.list()
+            bindData(result)
+        }
+    }
+    //S'execute sur le thread principal
+    private suspend fun bindData(result: List<SourceItem>) {
+        withContext(Dispatchers.Main) {
+            //afficher les données dans le recycler
+            Log.d("Sources", result.toString())
+
+            listModeResult = result
+            activity?.change(ChoiceFragment.newInstance(listModeResult))
+        }
+    }
+
     override fun onItemClicked(element:Any) {
         element as Mode
         //Toast.makeText(context,"Mode ${element.name}",Toast.LENGTH_LONG).show()
 
         when(element.name) {
             "Sources" -> {
-                listModeResult = listOf(
-                    SourceItem("0","BBC NEWS", "Description","url", "la catégorie", "fr", "France"),
-                    SourceItem("1","Atlantic", "Description","url", "la catégorie", "gb", "Grande bretagne"),
-                    SourceItem("2","Lesnumeriques.net", "Description","url", "la catégorie", "fr", "France")
-                )
+                lifecycleScope.launch {
+                    getSources()
+                }
             }
             "Catégories" -> {
                 listModeResult = listOf(
@@ -56,6 +79,8 @@ class ModesFragment: Fragment(), OnItemClickListener {
                     Category("Sciences","c'est la sciences", "https://cdn.futura-sciences.com/buildsv6/images/wide1920/a/0/2/a0269d7a2e_50155960_science-20e-siecle-artinspiring-fotolia.jpg"),
                     Category("Ecologie","c'est l'écologie", "https://youmatter.world/app/uploads/sites/3/2018/08/ecologie-solutions.jpg")
                 )
+                activity?.change(ChoiceFragment.newInstance(listModeResult))
+
             }
             "Pays" -> {
                 listModeResult = listOf(
@@ -66,10 +91,11 @@ class ModesFragment: Fragment(), OnItemClickListener {
                     Country("Finlande"),
                     Country("Chine")
                 )
+                activity?.change(ChoiceFragment.newInstance(listModeResult))
+
+
             }
         }
-
-        activity?.change(ChoiceFragment.newInstance(listModeResult))
     }
 
     private fun bindRecyclerView() {
