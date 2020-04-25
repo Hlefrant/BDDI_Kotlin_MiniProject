@@ -22,3 +22,15 @@ fun FragmentActivity.change(fragment: Fragment) {
         addToBackStack(null)
     }.commit()
 }
+
+fun FragmentActivity.update(fragment: Fragment){
+    var frg: Fragment? = null
+    frg = fragment
+
+    var fr = supportFragmentManager.beginTransaction()
+
+    fr.detach(frg)
+    fr.attach(frg)
+    fr.commit()
+    
+}
