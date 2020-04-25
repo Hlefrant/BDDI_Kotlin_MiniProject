@@ -44,7 +44,7 @@ RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
             val img = root.findViewById<ImageView>(R.id.article_image)
             Glide.with(root.context).load(item.urlToImage).fitCenter().into(img)
 
-            txttitle.text = item.name
+            txttitle.text = item.title
             txt_description.text = item.description
             //txt_author.text = item.author
             txtdate.text = item.publishedAt

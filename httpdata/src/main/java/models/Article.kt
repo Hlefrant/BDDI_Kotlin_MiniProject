@@ -9,7 +9,7 @@ data class ArticleResult (
 data class Article(
     val author: String,
     val source: SourceItem,
-    val name: String,
+    val title: String,
     val description: String,
     val url: String,
     val urlToImage: String,
