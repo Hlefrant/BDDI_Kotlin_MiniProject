@@ -72,6 +72,18 @@ class ListArticleFragment : Fragment(), OnArticleClickListener {
         startActivity(browserIntent)
     }
 
+    override fun shareButtonClicked(article: Article) {
+        val title: String = article.title
+        val content: String = article.description
+        val intent = Intent(Intent.ACTION_SEND)
+
+        intent.setType("text/plain")
+        intent.putExtra(Intent.EXTRA_SUBJECT, title)
+        intent.putExtra(Intent.EXTRA_TEXT, content)
+        
+        startActivity(intent)
+    }
+
     //S'execute dans un thread secondaire
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
