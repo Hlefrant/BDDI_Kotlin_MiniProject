@@ -14,7 +14,7 @@ import models.Article
 
 @GlideModule
 
-class ArticleAdapter(private val dataset: List<Article>) :
+class ArticleAdapter(private val dataset: List<Article>, val itemClickListener: OnArticleClickListener) :
 RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,13 +24,16 @@ RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(dataset[position])
+        holder.bind(dataset[position], itemClickListener)
 
     override fun getItemCount(): Int = dataset.size
 
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
 
-        fun bind(item: Article) {
+        fun bind(
+            item: Article,
+            itemClickListener: OnArticleClickListener
+        ) {
             val txttitle = root.findViewById<TextView>(R.id.article_title)
             val txt_description = root.findViewById<TextView>(R.id.article_description)
             //val txt_author = root.findViewById<TextView>(R.id.article_author)
@@ -48,6 +51,13 @@ RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
             //txt_content.text = item.content
             txtsource.text = item.source.name
 
+            root.setOnClickListener {
+                itemClickListener.onItemClicked(item)
+            }
         }
     }
+}
+
+interface OnArticleClickListener{
+    fun onItemClicked(article: Article)
 }
