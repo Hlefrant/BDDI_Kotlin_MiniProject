@@ -1,11 +1,12 @@
 package com.hugolefrant.miniproject.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hugolefrant.miniproject.R
 import com.hugolefrant.miniproject.adapters.ArticleAdapter
-import com.hugolefrant.miniproject.change
+import com.hugolefrant.miniproject.adapters.OnArticleClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,7 +22,7 @@ import models.Article
 import repositories.ArticleRepository
 
 
-class ListArticleFragment : Fragment() {
+class ListArticleFragment : Fragment(), OnArticleClickListener {
     private val repository = ArticleRepository()
 
     private lateinit var adapter: ArrayAdapter<String>
@@ -65,6 +66,12 @@ class ListArticleFragment : Fragment() {
         }
     }
 
+    override fun onItemClicked(article: Article) {
+        val browserIntent =
+            Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+        startActivity(browserIntent)
+    }
+
     //S'execute dans un thread secondaire
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
@@ -76,7 +83,7 @@ class ListArticleFragment : Fragment() {
     //S'execute sur le thread principal
     private suspend fun bindData(result: List<Article>) {
         withContext(Dispatchers.Main) {
-            val adapterRecycler = ArticleAdapter(result)
+            val adapterRecycler = ArticleAdapter(result, this@ListArticleFragment)
             recycler_view.layoutManager = LinearLayoutManager(context)
             recycler_view.adapter = adapterRecycler
         }
