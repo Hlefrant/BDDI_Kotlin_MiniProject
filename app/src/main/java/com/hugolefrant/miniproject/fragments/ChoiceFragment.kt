@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.hugolefrant.miniproject.adapters.ChoiceAdapter
 import com.hugolefrant.miniproject.adapters.ModeAdapter
 import com.hugolefrant.miniproject.adapters.OnItemClickListener
 import com.hugolefrant.miniproject.change
+import kotlinx.android.synthetic.main.fragment_choices_view.*
 import models.*
 
 class ChoiceFragment: Fragment(), OnItemClickListener {
@@ -50,7 +52,6 @@ class ChoiceFragment: Fragment(), OnItemClickListener {
     override fun onItemClicked(element:Any) {
         when(element) {
             is SourceItem -> {
-
                 //Toast.makeText(context, "Mode ${element.name}", Toast.LENGTH_LONG).show()
                 choice = element.name
             }

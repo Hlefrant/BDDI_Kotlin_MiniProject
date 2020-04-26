@@ -31,7 +31,6 @@ class ChoiceAdapter(private val dataset: List<Any>, val itemClickListener: OnIte
             val txtviewName = root.findViewById<TextView>(R.id.choice_name)
 
             when(item) {
-
                 is SourceItem -> txtviewName.text = item.name
                 is Category -> txtviewName.text = item.title
                 is Country -> txtviewName.text = item.name

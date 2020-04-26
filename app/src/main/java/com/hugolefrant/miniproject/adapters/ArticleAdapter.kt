@@ -1,6 +1,5 @@
 package com.hugolefrant.miniproject.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,23 +37,18 @@ RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
         ) {
             val txttitle = root.findViewById<TextView>(R.id.article_title)
             val txt_description = root.findViewById<TextView>(R.id.article_description)
-            //val txt_author = root.findViewById<TextView>(R.id.article_author)
             val txtdate = root.findViewById<TextView>(R.id.article_date)
-            //val txt_content = root.findViewById<TextView>(R.id.article_content)
             val txtsource = root.findViewById<TextView>(R.id.article_source)
-
-            val img = root.findViewById<ImageView>(R.id.article_image)
-            Glide.with(root.context).load(item.urlToImage).fitCenter().into(img)
-
-            val shareButton = root.findViewById<Button>(R.id.share)
 
             txttitle.text = item.title
             txt_description.text = item.description
-            //txt_author.text = item.author
             txtdate.text = item.publishedAt
-            //txt_content.text = item.content
             txtsource.text = item.source.name
 
+            val img = root.findViewById<ImageView>(R.id.article_image)
+            Glide.with(root).load(item.urlToImage).into(img)
+
+            val shareButton = root.findViewById<Button>(R.id.share)
             shareButton.setOnClickListener {
                 itemClickListener.shareButtonClicked(item)
             }
