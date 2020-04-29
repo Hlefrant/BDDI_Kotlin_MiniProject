@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +41,9 @@ class ListArticleFragment : Fragment(), OnArticleClickListener {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.articles_view,container,false)
+
+
+
     }
 
     companion object {
@@ -57,6 +61,7 @@ class ListArticleFragment : Fragment(), OnArticleClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         recycler_view = view.findViewById(R.id.recycler_view)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -74,7 +79,7 @@ class ListArticleFragment : Fragment(), OnArticleClickListener {
 
     override fun shareButtonClicked(article: Article) {
         val title: String = article.title
-        val content: String = article.description
+        val content: String = article.url
         val intent = Intent(Intent.ACTION_SEND)
 
         intent.setType("text/plain")
